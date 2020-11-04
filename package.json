@@ -15,7 +15,8 @@
     "debug": "^2.6.9",
     "express": "^4.17.1",
     "mongodb": "^3.6.2",
-    "pug": "^2.0.0-rc.3"
+    "pug": "^2.0.0-rc.3",
+    "tsc": "^1.20150623.0"
   },
   "devDependencies": {
     "@types/debug": "0.0.30",

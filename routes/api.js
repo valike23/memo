@@ -1,59 +1,52 @@
-﻿/*
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+/*
  * GET users listing.
  */
-import * as express from 'express';
-import { MongoClient, MongoError } from "mongodb";
-import { Ilogin, Iuser, Imemo} from "../model/model";
+const express = require("express");
+const mongodb_1 = require("mongodb");
 const router = express.Router();
 const uri = 'mongodb+srv://lawbook_user:G9yJAwyId0D0Xky5@cluster0-rrnxg.mongodb.net/memo?retryWrites=true&w=majority';
 const connect = new Promise((resolve, reject) => {
-    MongoClient.connect(uri,  { useNewUrlParser: true }).then((mongoClient: MongoClient) => {
-        
+    mongodb_1.MongoClient.connect(uri, { useNewUrlParser: true }).then((mongoClient) => {
         resolve(mongoClient);
     }, (error) => {
         reject(error);
     });
 });
-
-
-router.post('/login', (req: express.Request, res: express.Response) => {
-    connect.then((data: MongoClient) => {
-        const body: Ilogin = req.body;
+router.post('/login', (req, res) => {
+    connect.then((data) => {
+        const body = req.body;
         const name = 'lawbook';
         console.log(body);
         const dbo = data.db(name);
         dbo.collection('user').find(body)
-            .toArray((err: MongoError, result: Array<Iuser>) => {
-                if (err) {
-                    console.log(err);
-                    res.status(505);
-                    res.json(err);
-                    res.end();
-                    return;
-                }
-                res.json(result);
+            .toArray((err, result) => {
+            if (err) {
+                console.log(err);
+                res.status(505);
+                res.json(err);
                 res.end();
-
-            });
-
-    }, (err: MongoError) => {
+                return;
+            }
+            res.json(result);
+            res.end();
+        });
+    }, (err) => {
         res.status(505).json(err);
         res.end();
         return;
     });
-
 });
-
-
-router.post('/memo', (req: express.Request, res: express.Response) => {
-    this.connect().then((data: MongoClient) => {
-        const body: Imemo = req.body;
+router.post('/memo', (req, res) => {
+    this.connect().then((data) => {
+        const body = req.body;
         const name = 'lawbook';
         body.createdAt = new Date();
         body.status = 'pending';
         console.log(body);
         const dbo = data.db(name);
-        dbo.collection('memo').insertOne(body, (err: MongoError, resp: any) => {
+        dbo.collection('memo').insertOne(body, (err, resp) => {
             if (err) {
                 console.log(err);
                 res.status(505);
@@ -66,17 +59,13 @@ router.post('/memo', (req: express.Request, res: express.Response) => {
             res.end();
         });
     });
-
-
 });
-
-
-router.get('/memo/:id', (req: express.Request, res: express.Response) => {
-    this.connect().then((data: MongoClient) => {
-        const param: string = req.params.id;
+router.get('/memo/:id', (req, res) => {
+    this.connect().then((data) => {
+        const param = req.params.id;
         const name = 'lawbook';
         const dbo = data.db(name);
-        dbo.collection('memo').find({ sender_matNo: param }).toArray((err: MongoError, result: Array<Imemo>) => {
+        dbo.collection('memo').find({ sender_matNo: param }).toArray((err, result) => {
             if (err) {
                 console.log(err);
                 res.status(505);
@@ -88,7 +77,6 @@ router.get('/memo/:id', (req: express.Request, res: express.Response) => {
             res.end();
         });
     });
-
 });
-
-export default router;
+exports.default = router;
+//# sourceMappingURL=api.js.map

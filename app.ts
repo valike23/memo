@@ -1,7 +1,7 @@
 ﻿import debug = require('debug');
 import express = require('express');
 import path = require('path');
-
+import * as cors from 'cors';
 import routes from './routes/index';
 import users from './routes/user';
 import api from './routes/api';
@@ -12,6 +12,7 @@ app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     next();
 });
+app.use(cors());
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');

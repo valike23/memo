@@ -11,6 +11,8 @@
   },
   "main": "app.js",
   "dependencies": {
+    "@types/cors": "^2.8.8",
+    "cors": "^2.8.5",
     "debug": "^2.6.9",
     "express": "^4.17.1",
     "mongodb": "^3.6.2",

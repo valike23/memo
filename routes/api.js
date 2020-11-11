@@ -39,7 +39,7 @@ router.post('/login', (req, res) => {
     });
 });
 router.post('/memo', (req, res) => {
-    this.connect().then((data) => {
+    connect.then((data) => {
         const body = req.body;
         const name = 'lawbook';
         body.createdAt = new Date();
@@ -61,7 +61,7 @@ router.post('/memo', (req, res) => {
     });
 });
 router.get('/memo/:id', (req, res) => {
-    this.connect().then((data) => {
+    connect.then((data) => {
         const param = req.params.id;
         const name = 'lawbook';
         const dbo = data.db(name);

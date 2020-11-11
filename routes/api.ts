@@ -46,7 +46,7 @@ router.post('/login', (req: express.Request, res: express.Response) => {
 
 
 router.post('/memo', (req: express.Request, res: express.Response) => {
-    this.connect().then((data: MongoClient) => {
+    connect.then((data: MongoClient) => {
         const body: Imemo = req.body;
         const name = 'lawbook';
         body.createdAt = new Date();
@@ -72,7 +72,7 @@ router.post('/memo', (req: express.Request, res: express.Response) => {
 
 
 router.get('/memo/:id', (req: express.Request, res: express.Response) => {
-    this.connect().then((data: MongoClient) => {
+    connect.then((data: MongoClient) => {
         const param: string = req.params.id;
         const name = 'lawbook';
         const dbo = data.db(name);

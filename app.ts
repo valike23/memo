@@ -5,7 +5,7 @@ import * as cors from 'cors';
 import routes from './routes/index';
 import users from './routes/user';
 import api from './routes/api';
-
+import { json, urlencoded } from 'body-parser';
 var app = express();
 app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -16,7 +16,8 @@ app.use(cors());
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
-
+app.use(urlencoded({ extended: false }));
+app.use(json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
@@ -30,7 +31,7 @@ app.use(function (req, res, next) {
     next(err);
 });
 
-// error handlers
+// er
 
 // development error handler
 // will print stacktrace

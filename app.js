@@ -7,6 +7,7 @@ const cors = require("cors");
 const index_1 = require("./routes/index");
 const user_1 = require("./routes/user");
 const api_1 = require("./routes/api");
+const body_parser_1 = require("body-parser");
 var app = express();
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -17,6 +18,8 @@ app.use(cors());
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+app.use(body_parser_1.urlencoded({ extended: false }));
+app.use(body_parser_1.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index_1.default);
 app.use('/users', user_1.default);
@@ -27,7 +30,7 @@ app.use(function (req, res, next) {
     err['status'] = 404;
     next(err);
 });
-// error handlers
+// er
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {

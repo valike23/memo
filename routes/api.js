@@ -41,6 +41,7 @@ router.post('/login', (req, res) => {
 router.post('/memo', (req, res) => {
     connect.then((data) => {
         const body = req.body;
+        console.log('body', req.body);
         const name = 'lawbook';
         body.createdAt = new Date();
         body.status = 'pending';

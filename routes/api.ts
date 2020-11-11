@@ -46,8 +46,10 @@ router.post('/login', (req: express.Request, res: express.Response) => {
 
 
 router.post('/memo', (req: express.Request, res: express.Response) => {
+    
     connect.then((data: MongoClient) => {
         const body: Imemo = req.body;
+        console.log('body',req.body);
         const name = 'lawbook';
         body.createdAt = new Date();
         body.status = 'pending';
